@@ -8,10 +8,10 @@
     %h1 eagle
     #lookup
       %form{:action => 'lookup', :method => 'post'}
-        %select#action{:name => 'action'}
+        %select#instance{:name => 'instance'}
           %option{:value => ''} --
-          %option{:value => 'prefix'} lookup a bgp prefix
-        %input#data{:name => 'data', :placeholder => '...', :size => '50', :type => 'text'}/
+          %option{:value => 'local'} local instance
+        %input#prefix{:name => 'prefix', :placeholder => '...', :size => '50', :type => 'text'}/
         %input#btngo{:type => 'submit', :value => 'go!'}/
     #results
       =yield
