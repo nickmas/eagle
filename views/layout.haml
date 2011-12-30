@@ -1,20 +1,31 @@
 %html
   %head
-    %title eagle: a bird looking glass
-    %script{:src => 'http://be.gs/jqgcdn', :type => 'text/javascript'}
-    %script{:src => 'eagle.js', :type => 'text/javascript'}
-    %link{:rel => 'stylesheet', :href => 'eagle.css'}
+    %title= 'eagle: a bird looking glass'
+    %link{ :rel => 'stylesheet', :href => '/css/reset.css' }
+    %link{ :rel => 'stylesheet', :href => '/css/default.css' }
+    %link{ :rel => 'stylesheet', :href => '/css/formalize.css' }
+    %script{ :language => 'javascript', :src => '/js/jquery/jquery-1.6.2.min.js' }
+    %script{ :language => 'javascript', :src => '/js/jquery.formalize.min.js' }
+    %script{ :language => 'javascript', :src => '/js/jquery.tmpl.min.js' }
+    %script{ :language => 'javascript', :src => '/js/knockoutjs/knockout-1.2.1.js' }
+    %script{ :language => 'javascript', :src => '/js/raphael/raphael-min.js' }
+    %script{ :language => 'javascript', :src => '/js/raphael/g.raphael-min.js' }
+    %script{ :language => 'javascript', :src => '/js/raphael/g.bar-min.js' }
+    %script{ :language => 'javascript', :src => '/js/raphael/g.dot-min.js' }
+    %script{ :language => 'javascript', :src => '/js/raphael/g.line-min.js' }
+    %script{ :language => 'javascript', :src => '/js/raphael/g.pie-min.js' }
+    %script{ :language => 'javascript', :src => '/js/eagle/eagle.js' }
   %body
-    %h1 eagle
-    #lookup
-      %form{:action => 'lookup', :method => 'post'}
-        %select#instance{:name => 'instance'}
-          %option{:value => ''} --
-          %option{:value => 'local'} local instance
-        %input#prefix{:name => 'prefix', :placeholder => '...', :size => '50', :type => 'text'}/
-        %input#btngo{:type => 'submit', :value => 'go!'}/
-    #results
-      =yield
-    %br
-    %hr{:noshade => '#000000' }
-    <!-- hi dave! -->
+    #container
+      %h1 eagle
+      #lookup
+        %form{ :action => '/lookup', :method => 'POST' }
+          %select#instance{ :name => 'instance' }
+            %option{ :value => ''} --
+            %option{ :value => 'local' } local instance
+          %input#prefix{ :name => 'prefix', :placeholder => '...', :size => '50', :type => 'text' }
+          %input#btngo{ :type => 'submit', :value => 'go!' }
+      #results
+        =yield
+      %br
+      %hr{:noshade => '#000000' }

@@ -1,6 +1,14 @@
-require 'rake'
+$: << File.dirname(__FILE__) + '/lib' unless $:.include? File.dirname(__FILE__) + '/lib'
 
-namespace :deploy do
+require 'rake'
+require 'sinatra/activerecord/rake'
+require 'cucumber/rake/task'
+
+# load our setup routines (sql, redis, etc), before loading our app
+Dir[File.join(File.dirname(__FILE__), 'lib', 'setup', "*.rb")].each { |file| require file }
+require 'appname'
+
+namespace :server do
   task :start do
     system "thin -s 1 -C config.yml -R config.ru start"
   end
@@ -10,9 +18,19 @@ namespace :deploy do
   end
 end
 
-task :start => [ 'deploy:start' ]
-task :stop => [ 'deploy:stop' ]
-task :restart => [ 'deploy:stop', 'deploy:start' ]
+desc 'Run Cucumber tests'
+Cucumber::Rake::Task.new(:features) do |t|
+  t.cucumber_opts = "features --format pretty"
+end
+
+desc 'Start the web application'
+task :start => [ 'server:start' ]
+
+desc 'Stop the web application'
+task :stop => [ 'server:stop' ]
+
+desc 'Restart the web application'
+task :restart => [ 'server:stop', 'server:start' ]
 task :default do
   puts
   puts 'rake <action>'
