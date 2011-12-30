@@ -1,6 +1,13 @@
 ---
-max_conns: 128
-timeout: 30
-max_persistent_conns: 16
-servers: 1
-daemonize: true
+  environment: development
+  chdir: .
+  address: 0.0.0.0
+  port: 18927
+  rackup: config.ru
+  pid: run/server.pid
+  log: run/server.log
+  max_conns: 128
+  timeout: 30
+  max_persistent_conns: 16
+  servers: 1
+  daemonize: true
