@@ -17,6 +17,7 @@ gem 'json'
 gem 'rake'
 gem 'SystemTimer', :platforms => :ruby_18
 gem 'rack-flash'
+gem 'net-dns'
 
 group :test do
   gem 'cucumber'

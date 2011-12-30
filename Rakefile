@@ -6,7 +6,7 @@ require 'cucumber/rake/task'
 
 # load our setup routines (sql, redis, etc), before loading our app
 Dir[File.join(File.dirname(__FILE__), 'lib', 'setup', "*.rb")].each { |file| require file }
-require 'appname'
+require 'eagle'
 
 namespace :server do
   task :start do

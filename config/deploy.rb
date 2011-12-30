@@ -1,4 +1,4 @@
-set :application, 'appname'
+set :application, 'eagle'
 
 set :repository,  '../'
 set :scm, :git

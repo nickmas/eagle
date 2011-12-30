@@ -1,12 +1,24 @@
+require 'rubygems'
 require 'sinatra'
+require 'sinatra/async'
+require 'sinatra/settings'
 require 'haml'
-require 'sass'
+require 'rack-flash'
+require 'eagle'
 require 'socket'
 require 'json'
 require 'net/dns/resolver'
 
 module Eagle
-  class WebApplication < Sinatra::Base
+  class Application < Sinatra::Application
+    register Sinatra::Async
+    configure :development do
+      register Sinatra::Settings
+      enable :show_settings
+    end
+    use Rack::Session::Pool
+    use Rack::Flash
+
     helpers do
       # quick and dirty helper to resolve IP addresses
       def resolve_ip(ip)
@@ -29,18 +41,8 @@ module Eagle
       end
     end
 
-    get '/' do
-      haml :index
-    end
-
-    get '/eagle.css' do
-      content_type 'text/css', :charset => 'utf-8'
-      sass :eagle
-    end
-
-    get '/eagle.js' do
-      content_type 'text/javascript', :charset => 'utf-8'
-     File.read File.join('public', 'eagle.js')
+    aget '/' do
+      body { haml :index }
     end
 
     # XXX: need a proper error handler for class init failure
@@ -64,6 +66,11 @@ module Eagle
     get %r{/lookup/(aspath|communities|localpref|nexthop|origin_as)} do
       nil unless params[:prefix]
       JSON.pretty_generate collect(params[:prefix], params[:captures].first).uniq
+    end
+    
+    aget %r{/css/(default|reset)\.css} do |css|
+      content_type 'text/css', :charset => 'utf-8'
+      body { sass :"#{css}" }
     end
   end
 end

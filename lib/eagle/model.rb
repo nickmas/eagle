@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'active_record'
 
-module AppName
+module Eagle
   module Model
     class Table < ActiveRecord::Base
     end

@@ -3,7 +3,7 @@ $: << File.dirname(__FILE__) + '/lib' unless $:.include? File.dirname(__FILE__) 
 require 'rubygems'
 require 'sinatra'
 require 'haml'
-require 'appname'
+require 'eagle'
 
 # set working directory
 working = File.expand_path File.dirname(__FILE__)
@@ -22,5 +22,5 @@ end
 
 # map urls
 map '/' do
-  run AppName::Application
+  run Eagle::Application
 end
