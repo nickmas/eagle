@@ -66,7 +66,7 @@ module Eagle
       return nil unless params[:prefix]
     end
     
-    aget %r{/css/(default|reset)\.css} do |css|
+    aget %r{/css/(\S+)\.css} do |css|
       content_type 'text/css', :charset => 'utf-8'
       body { sass :"#{css}" }
     end
