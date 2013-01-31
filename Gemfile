@@ -1,16 +1,15 @@
 source :rubygems
 gem 'eventmachine'
 gem 'thin'
-gem 'activerecord'
-gem 'pg'
-gem 'sqlite3'
 gem 'hiredis', '~> 0.3.1'
 gem 'redis', '>= 2.2.0', :require => ['redis', 'redis/connection/hiredis']
-gem 'redis-objects'
 gem 'sinatra'
 gem 'async_sinatra'
 gem 'sinatra-settings'
-gem 'sinatra-activerecord'
+gem 'rack', :git => 'git://github.com/rack/rack.git'
+gem 'rack-contrib', :git => 'git://github.com/rack/rack-contrib.git'
+gem 'activesupport'
+gem 'actionpack'
 gem 'haml'
 gem 'sass'
 gem 'json'
@@ -18,10 +17,5 @@ gem 'rake'
 gem 'SystemTimer', :platforms => :ruby_18
 gem 'rack-flash'
 gem 'net-dns'
-
-group :test do
-  gem 'cucumber'
-  gem 'rspec'
-  gem 'rspec-expectations'
-  gem 'capybara'
-end
+gem 'sinatra-static-assets', :require => 'sinatra/static_assets'
+gem 'rack-flash3', :require => 'rack/flash'
