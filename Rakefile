@@ -1,7 +1,6 @@
 $: << File.dirname(__FILE__) + '/lib' unless $:.include? File.dirname(__FILE__) + '/lib'
 
 require 'rake'
-require 'sinatra/activerecord/rake'
 require 'cucumber/rake/task'
 
 # load our setup routines (sql, redis, etc), before loading our app
