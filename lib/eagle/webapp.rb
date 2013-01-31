@@ -61,9 +61,9 @@ module Eagle
       #end
     end
 
-    get %r{/lookup/(aspath|communities|localpref|nexthop|origin_as)} do
-      JSON.pretty_generate collect(params[:prefix], params[:captures].first).uniq
+    get %r{/lookup/(aspath|communities|localpref|nexthop|origin_as)} do |reqtype|
       return nil unless params[:prefix]
+      JSON.pretty_generate collect(params[:prefix], reqtype).uniq
     end
     
     aget %r{/css/(\S+)\.css} do |css|
