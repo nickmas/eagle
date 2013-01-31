@@ -1,13 +1,7 @@
-require 'rubygems'
-require 'sinatra'
-require 'sinatra/async'
-require 'sinatra/settings'
-require 'haml'
-require 'rack-flash'
+require 'bundler'
+Bundler.require
+
 require 'eagle'
-require 'socket'
-require 'json'
-require 'net/dns/resolver'
 
 module Eagle
   class Application < Sinatra::Application
