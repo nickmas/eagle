@@ -29,10 +29,12 @@ module Eagle
 
       # return array of a specific type
       def collect(prefix, type)
-        collection = Array.new
+        collection = []
+
         lookup.prefix.each do |prefix|
           collection.push prefix[type]
         end
+
         collection
       end
     end
