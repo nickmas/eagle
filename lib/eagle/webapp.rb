@@ -21,7 +21,9 @@ module Eagle
 
       # init eagle class and perform lookup
       def lookup(prefix)
-        nil unless eagle = Eagle.new rescue nil
+        eagle = Eagle.new rescue nil
+        return nil unless eagle
+
         eagle.find_prefix prefix
       end
 
@@ -42,13 +44,13 @@ module Eagle
     # XXX: need a proper error handler for class init failure
     #       and missing form parameters
     get '/lookup' do
-      nil unless params[:prefix]
+      return nil unless params[:prefix]
       JSON.pretty_generate lookup(params[:prefix])
     end
 
     post '/lookup' do
       # default to prefix lookup for now
-      nil unless params[:data]
+      return nil unless params[:data]
 
       # default to prefix lookup for now
       #if params[:action] == 'prefix'
@@ -58,8 +60,8 @@ module Eagle
     end
 
     get %r{/lookup/(aspath|communities|localpref|nexthop|origin_as)} do
-      nil unless params[:prefix]
       JSON.pretty_generate collect(params[:prefix], params[:captures].first).uniq
+      return nil unless params[:prefix]
     end
     
     aget %r{/css/(default|reset)\.css} do |css|
